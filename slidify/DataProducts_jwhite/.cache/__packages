@@ -1,0 +1,9 @@
+base
+devtools
+slidify
+knitr
+RColorBrewer
+RGtk2
+rattle
+rpart
+rpart.plot

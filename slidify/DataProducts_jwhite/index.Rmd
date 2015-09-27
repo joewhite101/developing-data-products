@@ -1,0 +1,68 @@
+---
+title       : Developing Data Products Project
+subtitle    : Interactive Data Camp Prediction
+author      : Joe White
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Introduction
+
+- The objective of this presentation is to demonstrate slidify using the Kaggle examples from DataCamp
+  - The data and problem definition for this presentation come from here (https://campus.datacamp.com/courses/kaggle-r-tutorial-on-machine-learning)
+  - DataCamp has free courses on machine learning and other techniques. A great addition to your Johns Hopkins Coursera Courses!
+- Simple data set to predict fatality rates on the Titanic by gender, age, and other factors
+- This presentation makes the machine learning algorith taught by DataCamp interactive!
+  - You will input an age, gender, and other factors and the algorithm will predict if you would have survived the wreck of the Titanic
+
+---
+
+## The Algorithm and Prediction
+
+- The algorithm used to predict the data is a simple classification using the built in rpart library
+  - More on rpart can be found here: https://cran.r-project.org/web/packages/rpart/rpart.pdf
+- The algorithm builds a simple decision tree to predict survival based on:
+  - Gender
+  - Age
+  - Number of sibilings/spouses on-board
+  - Parents onboard
+  - Fare
+
+---
+
+
+## The Code
+
+- The code to generate the decision tree
+
+```{r}
+
+# Build the decision tree
+train <- read.csv("data/train.csv")
+my_tree <- rpart(Survived ~ Sex + Age + SibSp + Parch + Fare, 
+                 data=train, method="class")
+```
+
+---
+
+## Plotting the Decision Tree
+
+- A decision tree of the model generated Using the tools from rattle, rpart.plot, and RColorBrewer 
+
+```{r echo=FALSE}
+fancyRpartPlot(my_tree)
+```
+
+---
+
+## Output and Quality
+
+- The shiny application allows a user to input the variables and uses the data model to generate predictions
+  - Go here and try it out!: 
+- The code used to generate the prediction from user input is:
+
